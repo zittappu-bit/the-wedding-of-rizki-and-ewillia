@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rizki & Ewillia Wedding</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--maroon:#5A0F19;--gold:#e7c27d;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins,sans-serif;background:var(--maroon);color:#fff;overflow-x:hidden}
+section{min-height:100vh;padding:40px 20px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+h1,h2,h3{font-family:"Playfair Display",serif}
+.title{color:var(--gold);margin-bottom:15px}
+.card{max-width:650px;width:100%;background:rgba(255,255,255,.08);padding:25px;border-radius:20px;margin:10px}
+.reveal{opacity:0;transform:translateY(40px);transition:1s}
+.reveal.active{opacity:1;transform:none}
+#cover{position:fixed;inset:0;background:#5A0F19;display:flex;justify-content:center;align-items:center;z-index:9999}
+.envelope{width:320px;height:220px;position:relative}
+.back{position:absolute;inset:0;background:#7a1624;border-radius:10px}
+.flap{position:absolute;inset:0;background:#922638;clip-path:polygon(0 0,100% 0,50% 60%);transform-origin:top;transition:1s}
+.open .flap{transform:rotateX(180deg)}
+.letter{position:absolute;left:5%;top:5%;width:90%;height:90%;background:#fff;color:#5A0F19;border-radius:10px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+button{padding:10px 18px;border:none;border-radius:30px;cursor:pointer}
+.btn{background:#5A0F19;color:#fff;margin-top:12px}
+.hide{opacity:0;visibility:hidden;transition:1s}
+.countdown{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.box{background:rgba(255,255,255,.1);padding:15px;border-radius:12px;min-width:80px}
+.box span{display:block;font-size:26px;color:var(--gold)}
+input,textarea,select{width:100%;padding:10px;margin:8px 0;border-radius:10px;border:none}
+.flower{position:fixed;top:-20px;color:#e7c27d;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div id="cover">
+<div class="envelope">
+<div class="back"></div>
+<div class="flap"></div>
+<div class="letter">
+<p>The Wedding Of</p>
+<h2>Rizki & Ewillia</h2>
+<button class="btn" onclick="openInvitation()">Buka Undangan</button>
+</div>
+</div>
+</div>
+
+<section class="reveal">
+<h1 style="color:#e7c27d;font-size:3rem">Rizki & Ewillia</h1>
+<p>Sabtu, 06 Juni 2026</p>
+</section>
+
+<section class="reveal">
+<h2 class="title">Assalamu'alaikum Wr. Wb.</h2>
+<div class="card">
+<h3>Rizki Gustian</h3>
+<p>Putra dari Bapak Nasrul & Ibu Rina Wati</p>
+<br>
+<h3>Ewillia Nova</h3>
+<p>Putri dari Bapak Edi Mafni & Ibu Ema Murni</p>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="title">Akad Nikah</h2>
+<div class="card">
+<p>Sabtu, 06 Juni 2026</p>
+<p>10.00 WIB s/d selesai</p>
+<p>Kediaman Mempelai Pria</p>
+<p>Jln. Purnama 5, Bencah Limbat</p>
+</div>
+
+<h2 class="title">Resepsi</h2>
+<div class="card">
+<p>Sabtu, 06 Juni 2026</p>
+<p>11.00 WIB s/d selesai</p>
+<p>Kediaman Mempelai Pria</p>
+<p>Jln. Purnama 5, Bencah Limbat</p>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="title">Countdown</h2>
+<div class="countdown">
+<div class="box"><span id="d">0</span>Hari</div>
+<div class="box"><span id="h">0</span>Jam</div>
+<div class="box"><span id="m">0</span>Menit</div>
+<div class="box"><span id="s">0</span>Detik</div>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="title">Amplop Digital</h2>
+<div class="card">
+<p>BNI</p>
+<h3>1933201905</h3>
+<p>a.n. Ewillia Nova</p>
+<button class="btn" onclick="navigator.clipboard.writeText('1933201905')">Salin Rekening</button>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="title">RSVP</h2>
+<div class="card">
+<input placeholder="Nama">
+<select><option>Hadir</option><option>Tidak Hadir</option></select>
+<textarea placeholder="Ucapan dan doa"></textarea>
+<button class="btn">Kirim</button>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="title">Terima Kasih</h2>
+<p>Merupakan suatu kehormatan bagi kami atas kehadiran dan doa restu Anda.</p>
+<h3 style="margin-top:20px">Rizki Gustian & Ewillia Nova</h3>
+</section>
+
+<script>
+function openInvitation(){
+ document.querySelector('.envelope').classList.add('open');
+ setTimeout(()=>document.getElementById('cover').classList.add('hide'),1000);
+}
+function reveal(){
+ document.querySelectorAll('.reveal').forEach(el=>{
+  if(el.getBoundingClientRect().top < window.innerHeight-100){el.classList.add('active');}
+ });
+}
+window.addEventListener('scroll',reveal); reveal();
+
+const target=new Date("2026-06-06T10:00:00").getTime();
+setInterval(()=>{
+ let n=new Date().getTime(),x=target-n;
+ document.getElementById('d').innerText=Math.floor(x/86400000);
+ document.getElementById('h').innerText=Math.floor((x%86400000)/3600000);
+ document.getElementById('m').innerText=Math.floor((x%3600000)/60000);
+ document.getElementById('s').innerText=Math.floor((x%60000)/1000);
+},1000);
+
+setInterval(()=>{
+ let f=document.createElement('div');
+ f.className='flower'; f.innerHTML='❀';
+ f.style.left=Math.random()*100+'vw';
+ f.style.animationDuration=(5+Math.random()*5)+'s';
+ document.body.appendChild(f);
+ setTimeout(()=>f.remove(),10000);
+},600);
+</script>
+</body>
+</html>
